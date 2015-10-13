@@ -2,6 +2,8 @@
 An attempt of mapping the raw data published on zakupki.gov.ru into OCDS 
 publisher.
 
+Copyright 2015 Al Nikolov
+
 ## Preambula
 [OCDS](http://standard.open-contracting.org/) stands for Open Contracting 
 Data Standard and aims for a semantic network creation of contracting 
@@ -46,4 +48,74 @@ In general, any government organization or instutution, as well as any budget
 institution, and in some cases companies (if budget capital invesments 
 granted to them) must align the spending activities to the Act.
 
+#### Technical regulation
 
+##### Contract data
+The current
+[contract register technical regulation](http://zakupki.gov.ru/epz/main/public/download/downloadDocument.html?id=8176) 
+should be defining all the practicalities of accessing the contracts data (and 
+some other data).
+
+Data should be available at the 
+[FTP server](ftp://free:free@ftp.zakupki.gov.ru/fcs_regions/) in form of XML 
+documents according to schema 
+fcsExport.xsd (as suggested but not found) compressed into ZIP archives. 
+Every archive file name should 
+contain the data egress type and data actuality period. 
+
+In non-contract data egress archives every XML document 
+file name should contain the document type, the related object identifier, and 
+the document identifier.
+
+Data egress performed manually should also present the
+time stamp of the manual operation in the archives file names.
+
+The data egress is split by region (represented by the topmost directory).
+
+Contract data then 
+placed into directories named "contracts", "contracts/currmonth" and
+"contracts/prevmonth". File modification time stamp seems to be not relevant 
+to the data, but to the egress operation. Regardless, since there is no 
+apparent distinctive procedure defined to modify any previously published data,
+the file modification time stamps must be tracked and any differences must be 
+considered as new releases.
+
+Automatic egress ZIP archive file name format: 
+"type_region_startdate_enddate_dailyrunningnumber.xml.zip",
+where date format is "yyyymmddhh" and the daily running number is 3 digits.
+
+Manual egress ZIP archive file name format:
+"type_region_startdate_enddate_egressdatetime_dailyrunningnumber.xml.zip",
+where egress date-time is yyyymmddhhmiss.
+
+Presumable, any date-time data is missing the MSK time zone.
+
+The automatic egress happens daily at 00:15 MSK and monthly on the first 
+Saturday at 06:00 MSK.
+
+##### Auxiliary data
+The same regulation should be defining some auxiliary data 
+egresses, such as dictionaries. the said data should be available th the
+[FTP server](ftp://free:free@ftp.zakupki.gov.ru/fcs_nsi/).
+
+Notably there should be the following data (in directories):
+
+* budgets ("nsibudget");
+* contract value amendment reasons ("nsiContractPriceChangeReason");
+* contract refusal reasons ("nsiContractRefusalReason");
+* single supplier contract reasons ("nsiContractSingleCustomerReason");
+* contract termination reasons ("nsiContractTerminationReason");
+* contract amendment reasons ("nsiContractModificationReason");
+* organizations ("nsiOrganization");
+* organization types ("nsiOrganizationType")
+
+etc. To be considered as needed.
+
+Full automatic data egress happens weekly on Sunday at 01:00 MSK. Incremental
+automatic data egress happens daily at 01:00 MSK.
+
+Full egress file name format:
+"dictionaryname_all_egressdatetime_dailyrunningnumber.xml.zip".
+
+Incremental egress file name format:
+"dictionaryname_inc_startdate_enddate_dailyrunningnumber.xml.zip"
