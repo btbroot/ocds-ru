@@ -124,3 +124,14 @@ Incremental egress file name format:
 Other data including these in directories "sketchplans", "plangraphs",
 "notifications", "protocols", "purchasedocs" are also of interest,
 but we haven't found any regulations for them.
+
+## Implementation
+Since the official system doesn't publish the data according to OCDS,
+we'll create a secondary publisher by first mirroring the data.
+
+### mirror-update
+This make target updates the local mirror of the data egressed. In order
+to keep it small enough for piloting, we'll start to mirror only one region
+(at the time of writing the mirror size is about 1 Gb).
+
+After syncronizing, the mirror content gets commited to Git repository.
