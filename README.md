@@ -88,7 +88,7 @@ Manual egress ZIP archive file name format:
 "type_region_startdate_enddate_egressdatetime_dailyrunningnumber.xml.zip",
 where egress date-time is yyyymmddhhmiss.
 
-Presumable, any date-time data is missing the MSK time zone.
+Presumaby, any date-time data is missing the MSK time zone.
 
 The automatic egress happens daily at 00:15 MSK and monthly on the first 
 Saturday at 06:00 MSK.
@@ -119,3 +119,8 @@ Full egress file name format:
 
 Incremental egress file name format:
 "dictionaryname_inc_startdate_enddate_dailyrunningnumber.xml.zip"
+
+##### Other data
+Other data including these in directories "sketchplans", "plangraphs",
+"notifications", "protocols", "purchasedocs" are also of interest,
+but we haven't found any regulations for them.
