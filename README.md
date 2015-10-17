@@ -50,48 +50,33 @@ granted to them) must align the spending activities to the Act.
 
 #### Technical regulation
 
-##### Contract data
 The current
-[contract register technical regulation](http://zakupki.gov.ru/epz/main/public/download/downloadDocument.html?id=8176) 
-should be defining all the practicalities of accessing the contracts data (and 
-some other data).
+[technical regulation](http://zakupki.gov.ru/epz/main/public/download/downloadDocument.html?id=3228) 
+should be defining all the practicalities of accessing the egress data.
 
+#### Basic data
 Data should be available at the 
 [FTP server](ftp://free:free@ftp.zakupki.gov.ru/fcs_regions/) in form of XML 
-documents according to schema 
-fcsExport.xsd (as suggested but not found) compressed into ZIP archives. 
+documents, compressed into ZIP archives. 
 Every archive file name should 
 contain the data egress type and data actuality period. 
 
-In non-contract data egress archives every XML document 
-file name should contain the document type, the related object identifier, and 
-the document identifier.
-
-Data egress performed manually should also present the
-time stamp of the manual operation in the archives file names.
-
 The data egress is split by region (represented by the topmost directory).
 
-Contract data then 
-placed into directories named "contracts", "contracts/currmonth" and
-"contracts/prevmonth". File modification time stamp seems to be not relevant 
-to the data, but to the egress operation. Regardless, since there is no 
-apparent distinctive procedure defined to modify any previously published data,
-the file modification time stamps must be tracked and any differences must be 
-considered as new releases.
+Data then is being 
+placed into directories named according to documents type:
 
-Automatic egress ZIP archive file name format: 
-"type_region_startdate_enddate_dailyrunningnumber.xml.zip",
-where date format is "yyyymmddhh" and the daily running number is 3 digits.
+* "contracts" (contracts?),
+* "protocols" (protocols of something?),
+* "purchasedocs" (purchase acts?),
+* "notifications" (tenders?),
+* "plangraphs" (schedules?)
+* "sketchplans" (draft pans?)
 
-Manual egress ZIP archive file name format:
-"type_region_startdate_enddate_egressdatetime_dailyrunningnumber.xml.zip",
-where egress date-time is yyyymmddhhmiss.
+Monthly archives go to the topmost directories. Daily archives for the current
+month go to "currmonth" subdirectories.
 
 Presumaby, any date-time data is missing the MSK time zone.
-
-The automatic egress happens daily at 00:15 MSK and monthly on the first 
-Saturday at 06:00 MSK.
 
 ##### Auxiliary data
 The same regulation should be defining some auxiliary data 
@@ -111,27 +96,17 @@ Notably there should be the following data (in directories):
 
 etc. To be considered as needed.
 
-Full automatic data egress happens weekly on Sunday at 01:00 MSK. Incremental
-automatic data egress happens daily at 01:00 MSK.
-
-Full egress file name format:
-"dictionaryname_all_egressdatetime_dailyrunningnumber.xml.zip".
-
-Incremental egress file name format:
-"dictionaryname_inc_startdate_enddate_dailyrunningnumber.xml.zip"
-
-##### Other data
-Other data including these in directories "sketchplans", "plangraphs",
-"notifications", "protocols", "purchasedocs" are also of interest,
-but we haven't found any regulations for them.
-
 ## Implementation
 Since the official system doesn't publish the data according to OCDS,
 we'll create a secondary publisher by first mirroring the data.
 
 ### mirror-update
 This make target updates the local mirror of the data egressed. In order
-to keep it small enough for piloting, we'll start to mirror only one region
-(at the time of writing the mirror size is about 1 Gb).
+to keep it small enough for piloting, we'll start to mirror only one region.
 
-After syncronizing, the mirror content gets commited to Git repository.
+### unzip-all
+As the data comes in ZIP archives, all not-yet-unpacked files found in the 
+mirror directory are being unzipped to the working directory (newer 
+ovewrwiting anything) and stamping the success.
+
+
