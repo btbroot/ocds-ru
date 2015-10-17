@@ -9,7 +9,7 @@ STAMPS=$(addprefix $(WORK_DIR)/,$(addsuffix .stamp,$(notdir $(ZIPS))))
 
 mirror-update:
 	lftp $(SRC_HOST) -u free,free \
-	  -e 'mirror fcs_regions/Moskva $(MIRROR_DIR)/fcs_regions/ -c -P5 -e --no-empty-dirs -X prevMonth/ -X sketchplans/'
+	  -e 'mirror fcs_regions/Moskva $(MIRROR_DIR)/fcs_regions/ -c -P5 -e --no-empty-dirs -X prevMonth/ -X sketchplans/ -X plangraphs/'
 
 unzip-all: $(STAMPS)
 
