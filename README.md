@@ -70,8 +70,8 @@ placed into directories named according to documents type:
 * "protocols" (protocols of something?),
 * "purchasedocs" (purchase acts?),
 * "notifications" (tenders?),
-* "plangraphs" (schedules?)
-* "sketchplans" (draft pans?)
+* "plangraphs" (schedules in "tenderPlan_...")
+* "sketchplans" (draft plans, no structured data)
 
 Monthly archives go to the topmost directories. Daily archives for the current
 month go to "currmonth" subdirectories.
@@ -104,9 +104,28 @@ we'll create a secondary publisher by first mirroring the data.
 This make target updates the local mirror of the data egressed. In order
 to keep it small enough for piloting, we'll start to mirror only one region.
 
+Files included in the mirror are .xml.zip.
+
+The "prevMonth" directories are omitted (the monthly egress should be enough).
+
+The "sketchplans" directories are omitted (no structured data at all).
+
+The "plangraphs" directories are omitted - see below.
+
+As 
+[Consultant](https://www.consultant.ru/document/cons_doc_LAW_144624/081ebfc463be2d2e8bda2693d8cd38b2cf0434f9/)
+says, the "procurement identification code" - basically the id for a 
+contracting process used to link together records in the draft plans, 
+schedules, tenders, contracts and other contractind documentss - will only be 
+required by the law since Jan 1st 2016. As a matter of fact, no linkage is
+feasible between schedule document records and the others.
+
+
 ### unzip-all
 As the data comes in ZIP archives, all not-yet-unpacked files found in the 
-mirror directory are being unzipped to the working directory (newer 
-ovewrwiting anything) and stamping the success.
+mirror directory are being unzipped to the working directory (never 
+overwriting anything) and stamping the success.
+
+Any "Unstructured" files are omitted.
 
 

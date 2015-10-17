@@ -8,12 +8,13 @@ ZIPS=$(shell find $(MIRROR_DIR) -name *.zip)
 STAMPS=$(addprefix $(WORK_DIR)/,$(addsuffix .stamp,$(notdir $(ZIPS))))
 
 mirror-update:
-	lftp $(SRC_HOST) -u free,free -e 'mirror fcs_regions/Moskva $(MIRROR_DIR)/fcs_regions/ -c -P5 -e --no-empty-dirs -X PrevMonth/'
+	lftp $(SRC_HOST) -u free,free \
+	  -e 'mirror fcs_regions/Moskva $(MIRROR_DIR)/fcs_regions/ -c -P5 -e --no-empty-dirs -X prevMonth/ -X sketchplans/'
 
 unzip-all: $(STAMPS)
 
 $(WORK_DIR)/%.stamp: %
-	unzip -j -n $< -d $(WORK_DIR) || test $$? -eq 1
+	unzip -j -n $< -x *Unstructured* -d $(WORK_DIR) || test $$? -eq 1
 	touch $@
 
 .PHONY: mirror-update unzip-all
