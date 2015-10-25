@@ -112,9 +112,8 @@ The "sketchplans" directories are omitted (no structured data at all).
 
 The "plangraphs" directories are omitted - see below.
 
-As 
-[Consultant](https://www.consultant.ru/document/cons_doc_LAW_144624/081ebfc463be2d2e8bda2693d8cd38b2cf0434f9/)
-says, the "procurement identification code" - basically the id for a 
+As the Act states,
+the "procurement identification code" - basically the id for a 
 contracting process used to link together records in the draft plans, 
 schedules, tenders, contracts and other contractind documentss - will only be 
 required by the law since Jan 1st 2016. As a matter of fact, no linkage is
