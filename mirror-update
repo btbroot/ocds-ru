@@ -4,12 +4,12 @@
 SOURCE=ftp://free:free@ftp.zakupki.gov.ru
 MIRROR=mirror
 WORK=work
-
-# Set these to only one region
-SRC_DIR=fcs_regions/Adygeja_Resp
+ONLY_REGION=$1
+SRC_DIR=fcs_regions/$ONLY_REGION
 DST_DIR=$SRC_DIR
 
-lftp $SOURCE -e "mirror $SRC_DIR $MIRROR/$DST_DIR -c -e --no-empty-dirs -P5 -v 1 -X notifications/ -X plangraphs/ -X protocols/ -X purchasedocs/ -X sketchplans/ -X prevMonth/; exit"
+lftp $SOURCE \
+  -e "mirror $SRC_DIR $MIRROR/$DST_DIR -c -e --no-empty-dirs -P5 -v 1 -X notifications/ -X plangraphs/ -X protocols/ -X purchasedocs/ -X sketchplans/ -X prevMonth/; exit"
 
 REGION_DIRS=$(find $MIRROR/fcs_regions -mindepth 1 -maxdepth 1 -type d)
 for REGION_DIR in $REGION_DIRS; do
