@@ -78,13 +78,21 @@ month go to "currmonth" subdirectories.
 
 Presumaby, any date-time data is missing the MSK time zone.
 
-##### Contracts
-Seems to have data packages in form of ZIP archives containing XML documents.
-Each document is either a:
-* sealed contract itself,
-* change of a sealed contract.
+##### "notifications" type
+fcsNotification
 
+##### "contracts" type
+contract
+: contract itself or a modification
 
+contractCancel
+: cancellation of a contract
+
+contractProcedure
+: implementation of a contract
+
+contractProcedureCancel
+: cancellation of a contract
 
 #### Auxiliary data
 The same regulation should be defining some auxiliary data 
@@ -105,10 +113,11 @@ Notably there should be the following data (in directories):
 etc. To be considered as needed.
 
 ## OCDS mapping
-Selected data can be mapped to OCDS.
+Selected data can be mapped to OCDS (definitions).
 
 ### OCDS contract
-
+id
+: /ns2:contract/id
 
 ## Implementation
 Since the official system doesn't publish the data according to OCDS,

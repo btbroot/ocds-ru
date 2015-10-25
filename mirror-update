@@ -9,12 +9,12 @@ SRC_DIR=fcs_regions/$ONLY_REGION
 DST_DIR=$SRC_DIR
 
 lftp $SOURCE \
-  -e "mirror $SRC_DIR $MIRROR/$DST_DIR -c -e --no-empty-dirs -P5 -v 1 -X notifications/ -X plangraphs/ -X protocols/ -X purchasedocs/ -X sketchplans/ -X prevMonth/; exit"
+  -e "mirror $SRC_DIR $MIRROR/$DST_DIR -c -e --no-empty-dirs -P5 -X plangraphs/ -X protocols/ -X purchasedocs/ -X sketchplans/ -X prevMonth/; exit"
 
 REGION_DIRS=$(find $MIRROR/fcs_regions -mindepth 1 -maxdepth 1 -type d)
 for REGION_DIR in $REGION_DIRS; do
   REGION=$(basename $REGION_DIR)
-  for DOC_TYPE in contracts; do
+  for DOC_TYPE in notifications contracts; do
       ZIPS=$(find $REGION_DIR/$DOC_TYPE -name *.zip)
       if [ -n "$ZIPS" ]; then
           mkdir -p $WORK/$REGION/$DOC_TYPE
