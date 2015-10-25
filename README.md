@@ -78,7 +78,15 @@ month go to "currmonth" subdirectories.
 
 Presumaby, any date-time data is missing the MSK time zone.
 
-##### Auxiliary data
+##### Contracts
+Seems to have data packages in form of ZIP archives containing XML documents.
+Each document is either a:
+* sealed contract itself,
+* change of a sealed contract.
+
+
+
+#### Auxiliary data
 The same regulation should be defining some auxiliary data 
 egresses, such as dictionaries. the said data should be available th the
 [FTP server](ftp://free:free@ftp.zakupki.gov.ru/fcs_nsi/).
@@ -96,28 +104,26 @@ Notably there should be the following data (in directories):
 
 etc. To be considered as needed.
 
+## OCDS mapping
+Selected data can be mapped to OCDS.
+
+### OCDS contract
+
+
 ## Implementation
 Since the official system doesn't publish the data according to OCDS,
 we'll create a secondary publisher by first mirroring the data.
 
 ### mirror-update
-This make target updates the local mirror of the data egressed. In order
-to keep it small enough for piloting, we'll start to mirror only one region.
+This script maintains the local mirror of the regional data egressed one to one,
+omitting non-informative directories. Notably, any disappeared source files
+also get removed in the mirror, any modified files silently get changed etc.
+There's no any kind of control on the data quality at this step.
 
-Files included in the mirror are .xml.zip.
-
-The "prevMonth" directories are omitted (the monthly egress should be enough).
-
-The "sketchplans" directories are omitted (no structured data at all).
-
-The "plangraphs" directories are omitted - see below.
-
-As the Act states,
-the "procurement identification code" - basically the id for a 
-contracting process used to link together records in the draft plans, 
-schedules, tenders, contracts and other contractind documentss - will only be 
-required by the law since Jan 1st 2016. As a matter of fact, no linkage is
-feasible between schedule document records and the others.
+The existing mirror content - the archives - then gets exploded into the work 
+directory, never overwriting any existing documents for speed. This assumes that
+no XML document can be silently replaced by the source with modified 
+content (republishing the same content in the same document file is tolerable).
 
 
 ### unzip-all
