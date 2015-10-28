@@ -23,8 +23,6 @@ A number of Federal Acts regulate the activities of interest, most notable are:
 * Federal Act 223;
 * Federal Act 94 (obsoleted by the Federal Act 44).
 
-We will focus on the first one, and follow up the rest as it become feasible.
-
 ### Federal Act 44
 The Act regulates activities aimed for satisfying state and municipal needs and 
 encompasses the whole cycle of:
@@ -52,14 +50,12 @@ granted to them) must align the spending activities to the Act.
 
 The current
 [technical regulation](http://zakupki.gov.ru/epz/main/public/download/downloadDocument.html?id=3228) 
-should be defining all the practicalities of accessing the egress data.
+should be defining all the practicalities of accessing the data egress.
 
 #### Basic data
 Data should be available at the 
 [FTP server](ftp://free:free@ftp.zakupki.gov.ru/fcs_regions/) in form of XML 
 documents, compressed into ZIP archives. 
-Every archive file name should 
-contain the data egress type and data actuality period. 
 
 The data egress is split by region (represented by the topmost directory).
 
@@ -69,17 +65,19 @@ placed into directories named according to documents type:
 * "contracts" (contracts?),
 * "protocols" (protocols of something?),
 * "purchasedocs" (purchase acts?),
-* "notifications" (tenders?),
-* "plangraphs" (schedules in "tenderPlan_...")
-* "sketchplans" (draft plans, no structured data)
+* "notifications" (tender notifications, results),
+* "plangraphs" (procurement schedules, required by the law since Jan 1st 2016),
+* "sketchplans" (procurement plans, no structured data).
 
 Monthly archives go to the topmost directories. Daily archives for the current
-month go to "currmonth" subdirectories.
+month go to "currMonth" subdirectories.
 
 Presumaby, any date-time data is missing the MSK time zone.
 
 ##### "notifications" type
-fcsNotification
+fcsPlacementResult
+: Not defined. Seem to be 
+
 
 ##### "contracts" type
 contract
@@ -112,34 +110,54 @@ Notably there should be the following data (in directories):
 
 etc. To be considered as needed.
 
-## OCDS mapping
-Selected data can be mapped to OCDS (definitions).
+#### OCDS mapping
 
-### OCDS contract
-id
-: /ns2:contract/id
+##### Planning
+Doesn't seem to be feasible to map since no links to further stage
+documents were found.
 
-## Implementation
-Since the official system doesn't publish the data according to OCDS,
-we'll create a secondary publisher by first mirroring the data.
+tenderPlan (plangraphs)
+: Procurement plan schedule.
 
-### mirror-update
-This script maintains the local mirror of the regional data egressed one to one,
-omitting non-informative directories. Notably, any disappeared source files
-also get removed in the mirror, any modified files silently get changed etc.
-There's no any kind of control on the data quality at this step.
+tenderPlanChange (plangraphs)
+: Modification to a procurement plan schedule. /Not seen yet/
 
-The existing mirror content - the archives - then gets exploded into the work 
-directory, never overwriting any existing documents for speed. This assumes that
-no XML document can be silently replaced by the source with modified 
-content (republishing the same content in the same document file is tolerable).
+tenderPlanCancel (plangraphs)
+: /Unknown/
 
+##### Tender
+fcsClarification
 
-### unzip-all
-As the data comes in ZIP archives, all not-yet-unpacked files found in the 
-mirror directory are being unzipped to the working directory (never 
-overwriting anything) and stamping the success.
+fcsContractSign
 
-Any "Unstructured" files are omitted.
+fcsNotificationCancel
+: Tender cancellation announcement
 
+fcsNotificationCancelFailure
 
+fcsNotificationEA44
+
+fcsNotificationEP44
+fcsNotificationISM44
+fcsNotificationLotCancel
+fcsNotificationOK44
+fcsNotificationOKD44
+fcsNotificationOKU44
+fcsNotificationPO44
+fcsNotificationZA44
+fcsNotificationZK44
+fcsNotificationZKB44
+fcsNotificationZKK44
+fcsNotificationZKKD44
+fcsNotificationZKKU44
+fcsNotificationZP44
+fcsPlacementResult
+fcsProtocolZKBI
+fcsPurchaseProlongationOK
+fcsPurchaseProlongationZK
+
+##### Contract
+contract
+contractCancel
+contractProcedure
+contractProcedureCancel
