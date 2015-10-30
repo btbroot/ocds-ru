@@ -19,7 +19,7 @@ unzip: $(ZIPSTAMPS)
 
 $(WORK_DIR)/%.zip.stamp: %.zip
 	mkdir -p $(WORK_DIR)/$<
-	unzip -jn $< -d $(WORK_DIR)/$< $(ZIP_EXCLUDES)|| [ $$? -eq 1 -o $$? -eq 11 ]
+	unzip -jo $< -d $(WORK_DIR)/$< $(ZIP_EXCLUDES)|| [ $$? -eq 1 -o $$? -eq 11 ]
 	touch $@
 
 
