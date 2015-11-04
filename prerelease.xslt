@@ -48,7 +48,7 @@
 									<value>
 										<!-- Optional -->
 										<amount><xsl:value-of select="t:price"/></amount>
-										<currency><xsl:value-of select="../../t:currency/t:code"/></currency>
+										<currency><xsl:value-of select="$prefix/t:lot/t:currency/t:code"/></currency>
 									</value>
 								</unit>
 							</item>
