@@ -13,7 +13,7 @@
 				<!-- Required -->
 				<xsl:variable name="prefix" select="/e:export/e:fcsNotificationZK"/>
 				<ocid><xsl:value-of select="$prefix/t:purchaseNumber"/></ocid>
-				<id><xsl:value-of select="$prefix/e:fcsNotificationZK/t:id"/></id>
+				<id><xsl:value-of select="$prefix/t:id"/></id>
 				<date><xsl:value-of select="$prefix/t:docPublishDate"/></date>
 				<tag>tender<xsl:if test="$prefix/t:modification">Amendment</xsl:if></tag>
 				<initiationType>tender</initiationType>
