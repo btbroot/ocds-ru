@@ -3,6 +3,7 @@
 
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:str="http://exslt.org/strings"
 	xmlns:t="http://zakupki.gov.ru/oos/types/1"
 	xmlns:e="http://zakupki.gov.ru/oos/export/1"
 >
@@ -13,20 +14,34 @@
 				<!-- Required -->
 				<xsl:variable name="prefix" select="/e:export/e:fcsNotificationZK"/>
 				<prerelease>
-					<ocid><xsl:value-of select="$prefix/t:purchaseNumber"/></ocid>
+					<ocid>ocds-btbroot01-<xsl:value-of select="$prefix/t:purchaseNumber"/></ocid>
 					<id><xsl:value-of select="$prefix/t:id"/></id>
 					<date><xsl:value-of select="$prefix/t:docPublishDate"/></date>
 					<tag>tender<xsl:if test="$prefix/t:modification">Amendment</xsl:if></tag>
 					<initiationType>tender</initiationType>
 					<!-- Optional -->
-					<!-- <planning> -->
+					<planning>
+						<!-- Optional -->
+						<budget>
+							<!-- Optional -->
+							<!-- <source> -->
+							<!-- <id> -->
+							<description><xsl:value-of select="$prefix/t:lot/t:financeSource"/></description>
+							<!-- <amount> -->
+							<!-- <project> -->
+							<!-- <projectID> -->
+							<!-- <uri> -->
+						</budget>
+						<!-- <rationale> -->
+						<!-- <documents> -->
+					</planning>
 					<tender>
 						<!-- Required -->
 						<id><xsl:value-of select="$prefix/t:purchaseNumber"/></id>
 						<!-- Optional -->
 						<title><xsl:value-of select="$prefix/t:purchaseObjectInfo"/></title>
 						<!-- <description> -->
-						<status>active</status>
+						<!-- <status> -->
 						<items>
 							<xsl:for-each select="$prefix/t:lot/t:purchaseObjects/t:purchaseObject">
 								<item>
@@ -126,12 +141,19 @@
 							</additionalIdentifiers>
 							<name><xsl:value-of select="$prefix/t:purchaseResponsible/t:responsibleOrg/t:fullName"/></name>
 							<address>
+								<xsl:variable name="address" select="str:split($prefix/t:purchaseResponsible/t:responsibleOrg/t:factAddress, ', ')"/>
 								<!-- Optional -->
-								<streetAddress><xsl:value-of select="$prefix/t:purchaseResponsible/t:responsibleOrg/t:factAddress"/></streetAddress>
-								<!-- <locality> -->
-								<!-- <region> -->
-								<!-- <postalCode> -->
-								<countryName>Российская Федерация</countryName>
+								<streetAddress>
+									<xsl:for-each select="$address">
+										<xsl:if test="position() > 4">
+											<xsl:value-of select="concat(., ' ')"/>
+										</xsl:if>
+									</xsl:for-each>
+								</streetAddress>
+								<locality><xsl:value-of select="$address[4]"/></locality>
+								<region><xsl:value-of select="$address[3]"/></region>
+								<postalCode><xsl:value-of select="$address[2]"/></postalCode>
+								<countryName><xsl:value-of select="$address[1]"/></countryName>
 							</address>
 							<contactPoint>
 								<!-- Optional -->
@@ -148,12 +170,19 @@
 							</contactPoint>
 							<!-- Extended -->
 							<x-mailAddress>
+								<xsl:variable name="address" select="str:split($prefix/t:purchaseResponsible/t:responsibleOrg/t:postAddress, ', ')"/>
 								<!-- Optional -->
-								<streetAddress><xsl:value-of select="$prefix/t:purchaseResponsible/t:responsibleOrg/t:postAddress"/></streetAddress>
-								<!-- <locality> -->
-								<!-- <region> -->
-								<!-- <postalCode> -->
-								<countryName>Российская Федерация</countryName>
+								<streetAddress>
+									<xsl:for-each select="$address">
+										<xsl:if test="position() > 4">
+											<xsl:value-of select="concat(., ' ')"/>
+										</xsl:if>
+									</xsl:for-each>
+								</streetAddress>
+								<locality><xsl:value-of select="$address[4]"/></locality>
+								<region><xsl:value-of select="$address[3]"/></region>
+								<postalCode><xsl:value-of select="$address[2]"/></postalCode>
+								<countryName><xsl:value-of select="$address[1]"/></countryName>
 							</x-mailAddress>
 						</procuringEntity>
 						<documents>
