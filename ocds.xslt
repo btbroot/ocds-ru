@@ -8,11 +8,11 @@
 	xmlns:e="http://zakupki.gov.ru/oos/export/1"
 >
 
+	<xsl:variable name="prefix" select="/*/*"/>
 	<xsl:template match="/">
 		<xsl:choose>
 			<xsl:when test="/e:export/e:fcsNotificationZK[@schemeVersion=1.0] and /e:export/e:fcsNotificationZK/t:placingWay/t:code='ZK44'">
 				<!-- Required -->
-				<xsl:variable name="prefix" select="/e:export/e:fcsNotificationZK"/>
 				<ocds>
 					<ocid>ocds-btbroot01-<xsl:value-of select="$prefix/t:purchaseNumber"/></ocid>
 					<id><xsl:value-of select="$prefix/t:id"/></id>
@@ -41,7 +41,7 @@
 						<!-- Optional -->
 						<title><xsl:value-of select="$prefix/t:purchaseObjectInfo"/></title>
 						<!-- <description> -->
-						<!-- <status> -->
+						<status>planning</status>
 						<items>
 							<xsl:for-each select="$prefix/t:lot/t:purchaseObjects/t:purchaseObject">
 								<item>
@@ -190,7 +190,7 @@
 								<!-- Required -->
 								<id><xsl:value-of select="$prefix/t:id"/></id>
 								<!-- Optional -->
-								<!-- <documentType> -->
+								<documentType>Tender notice</documentType>
 								<title>Этот документ</title>
 								<url><xsl:value-of select="$prefix/t:href"/></url>
 								<!-- <datePublished> -->
@@ -201,9 +201,9 @@
 							<xsl:for-each select="$prefix/t:attachments/t:attachment">
 								<document>
 									<!-- Required -->
-									<id><xsl:value-of select="concat('position-', position())"/></id>
+									<id><xsl:value-of select="t:url"/></id>
 									<!-- Optional -->
-									<!-- <documentType> -->
+									<documentType>Tender notice</documentType>
 									<title><xsl:value-of select="t:fileName"/></title>
 									<description><xsl:value-of select="t:docDescription"/></description>
 									<url><xsl:value-of select="t:url"/></url>
@@ -232,7 +232,14 @@
 								</milestone>
 							</xsl:for-each>
 						</milestones>
-						<!-- <amendment> -->
+						<xsl:if test="$prefix/t:modification">
+							<amendment>
+								<!-- Optional -->
+								<!-- <date> -->
+								<!-- <changes> -->
+								<!-- <rationale> -->
+							</amendment>
+						</xsl:if>
 					</tender>
 					<!-- <buyer> -->
 					<!-- <awards> -->
@@ -257,6 +264,68 @@
 							</buyer>
 						</xsl:for-each>
 					</x-buyers>
+					<x-source><xsl:copy-of select="/"/></x-source>
+				</ocds>
+			</xsl:when>
+			<xsl:when test="/e:export/e:fcsPurchaseDocument[@schemeVersion=1.0] and /e:export/e:fcsPurchaseDocument/t:docType/t:code='P'">
+				<!-- Required -->
+				<ocds>
+					<ocid>ocds-btbroot01-<xsl:value-of select="$prefix/t:purchaseNumber"/></ocid>
+					<id><xsl:value-of select="$prefix/t:id"/></id>
+					<date><xsl:value-of select="$prefix/t:docPublishDate"/></date>
+					<tag>tenderUpdate</tag>
+					<initiationType>tender</initiationType>
+					<!-- Optional -->
+					<!-- <planning> -->
+					<tender>
+						<!-- Required -->
+						<id><xsl:value-of select="$prefix/t:purchaseNumber"/></id>
+						<!-- Optional -->
+						<!-- <title> -->
+						<!-- <description> -->
+						<!-- <status> -->
+						<!-- <items> -->
+						<!-- <minValue> -->
+						<!-- <value> -->
+						<!-- <procurementMethod> -->
+						<!-- <procurementMethodRationale> -->
+						<!-- <awardCriteria> -->
+						<!-- <awardCriteriaDetails> -->
+						<!-- <submissionMethod> -->
+						<!-- <submissionMethodDetails> -->
+						<!-- <tenderPeriod> -->
+						<!-- <enquiryPeriod> -->
+						<!-- <hasEnquiries> -->
+						<!-- <eligibilityCriteria> -->
+						<!-- <awardPeriod> -->
+						<!-- <numberOfTenderers> -->
+						<!-- <tenderers> -->
+						<!-- <procuringEntity> -->
+						<documents>
+							<xsl:for-each select="$prefix/t:attachments/t:attachment">
+								<document>
+									<!-- Required -->
+									<id><xsl:value-of select="t:url"/></id>
+									<!-- Optional -->
+									<documentType>evaluationReports</documentType>
+									<title><xsl:value-of select="t:fileName"/></title>
+									<description><xsl:value-of select="t:docDescription"/></description>
+									<url><xsl:value-of select="t:url"/></url>
+									<!-- <datePublished> -->
+									<!-- <dateModified> -->
+									<!-- <format> -->
+									<language>ru</language>
+								</document>
+							</xsl:for-each>
+						</documents>
+						<!-- <milestones> -->
+						<!-- <amendment> -->
+					</tender>
+					<!-- <buyer> -->
+					<!-- <awards> -->
+					<!-- <contracts> -->
+					<language>ru</language>
+					<!-- Extended -->
 					<x-source><xsl:copy-of select="/"/></x-source>
 				</ocds>
 			</xsl:when>
