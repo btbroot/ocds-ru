@@ -13,7 +13,7 @@
 			<xsl:when test="/e:export/e:fcsNotificationZK[@schemeVersion=1.0] and /e:export/e:fcsNotificationZK/t:placingWay/t:code='ZK44'">
 				<!-- Required -->
 				<xsl:variable name="prefix" select="/e:export/e:fcsNotificationZK"/>
-				<prerelease>
+				<ocds>
 					<ocid>ocds-btbroot01-<xsl:value-of select="$prefix/t:purchaseNumber"/></ocid>
 					<id><xsl:value-of select="$prefix/t:id"/></id>
 					<date><xsl:value-of select="$prefix/t:docPublishDate"/></date>
@@ -258,7 +258,7 @@
 						</xsl:for-each>
 					</x-buyers>
 					<x-source><xsl:copy-of select="/"/></x-source>
-				</prerelease>
+				</ocds>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message terminate="yes">Unrecognized input type.</xsl:message>
