@@ -157,22 +157,23 @@
 								</unit>
 								<!-- Extended -->
 								<xsl:for-each select="t:customerQuantities/t:customerQuantitie">
-									<x-byuers>
-										<!-- Optional -->
-										<identifier>
+									<x-share>
+										<buyer>
 											<!-- Optional -->
-											<scheme>x-СПЗ</scheme>
-											<id><xsl:value-of select="t:customer/t:regNum"/></id>
-											<legalName><xsl:value-of select="t:customer/t:fullName"/></legalName>
-											<!-- <uri> -->
-										</identifier>
-										<!-- <additionalIdentifiers> -->
-										<name><xsl:value-of select="t:customer/t:fullName"/></name>
-										<!-- <address> -->
-										<!-- <contactPoint> -->
-										<!-- Extended -->
+											<identifier>
+												<!-- Optional -->
+												<scheme>x-СПЗ</scheme>
+												<id><xsl:value-of select="t:customer/t:regNum"/></id>
+												<legalName><xsl:value-of select="t:customer/t:fullName"/></legalName>
+												<!-- <uri> -->
+											</identifier>
+											<!-- <additionalIdentifiers> -->
+											<name><xsl:value-of select="t:customer/t:fullName"/></name>
+											<!-- <address> -->
+											<!-- <contactPoint> -->
+										</buyer>
 										<quantity><xsl:value-of select="t:quantity/t:value"/></quantity>
-									</x-byuers>
+									</x-share>
 								</xsl:for-each>
 							</items>
 						</xsl:for-each>
@@ -391,7 +392,34 @@
 							<!-- <uri> -->
 						</x-extrabudget>
 					</planning>
-					<!-- <tender> -->
+					<tender>
+						<!-- Required -->
+						<id><xsl:value-of select="/*/*/t:foundation/t:fcsOrder/t:notificationNumber"/></id>
+						<!-- Optional -->
+						<!-- <title> -->
+						<!-- <description> -->
+						<status>complete</status>
+						<!-- <items> -->
+						<!-- <minValue> -->
+						<!-- <value> -->
+						<!-- <procurementMethod> -->
+						<!-- <procurementMethodRationale> -->
+						<!-- <awardCriteria> -->
+						<!-- <awardCriteriaDetails> -->
+						<!-- <submissionMethod> -->
+						<!-- <submissionMethodDetails> -->
+						<!-- <tenderPeriod> -->
+						<!-- <enquiryPeriod> -->
+						<!-- <hasEnquiries> -->
+						<!-- <eligibilityCriteria> -->
+						<!-- <awardPeriod> -->
+						<!-- <numberOfTenderers> -->
+						<!-- <tenderers> -->
+						<!-- <procuringEntity> -->
+						<!-- <documents> -->
+						<!-- <milestones> -->
+						<!-- <amendment> -->
+					</tender>
 					<!-- <buyer> -->
 					<awards>
 						<!-- Required -->
@@ -399,7 +427,7 @@
 						<!-- Optional -->
 						<!-- <title> -->
 						<!-- <description> -->
-						<!-- <status> -->
+						<status>active</status>
 						<!-- <date> -->
 						<value>
 							<!-- Optional -->
@@ -520,7 +548,7 @@
 						<!-- Optional -->
 						<!-- <title> -->
 						<!-- <description> -->
-						<!-- <status> -->
+						<status>active</status>
 						<period>
 							<!-- Optional -->
 							<!-- <startDate> -->
@@ -574,6 +602,34 @@
 						</xsl:for-each>
 						<!-- <amendment> -->
 						<!-- <implementation> -->
+						<!-- Extended -->
+						<x-buyer>
+							<!-- Optional -->
+							<identifier>
+								<!-- Optional -->
+								<scheme>x-СПЗ</scheme>
+								<id><xsl:value-of select="/*/*/t:customer/t:regNum"/></id>
+								<legalName><xsl:value-of select="/*/*/t:customer/t:fullName"/></legalName>
+								<!-- <uri> -->
+							</identifier>
+							<additionalIdentifiers>
+								<!-- Optional -->
+								<scheme>x-ИНН</scheme>
+								<id><xsl:value-of select="/*/*/t:customer/t:inn"/></id>
+								<!-- <legalName> -->
+								<!-- <uri> -->
+							</additionalIdentifiers>
+							<additionalIdentifiers>
+								<!-- Optional -->
+								<scheme>x-КПП</scheme>
+								<id><xsl:value-of select="/*/*/t:customer/t:kpp"/></id>
+								<!-- <legalName> -->
+								<!-- <uri> -->
+							</additionalIdentifiers>
+							<name><xsl:value-of select="/*/*/t:customer/t:fullName"/></name>
+							<!-- <address> -->
+							<!-- <contactPoint> -->
+						</x-buyer>
 					</contracts>
 					<language>ru</language>
 					<x-source><xsl:copy-of select="/"/></x-source>
