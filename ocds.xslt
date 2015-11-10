@@ -117,7 +117,7 @@
 						<xsl:for-each select="/*/*/t:lot/t:purchaseObjects/t:purchaseObject">
 							<items>
 								<!-- Required -->
-								<id><xsl:value-of select="concat('position-', position())"/></id>
+								<id><xsl:value-of select="t:name"/></id>
 								<!-- Optional -->
 								<description><xsl:value-of select="t:name"/></description>
 								<classification>
@@ -239,17 +239,14 @@
 							</documents>
 						</xsl:for-each>
 						<!-- <milestones> -->
-						<amendment>
-							<!-- Optional -->
-							<date>
-								<xsl:value-of select="/*/*/t:modification/t:reason/t:responsibleDecision/t:decisionDate"/>
-								<xsl:value-of select="/*/*/t:modification/t:reason/t:authorityPrescription/t:externalPrescription/t:docDate"/>
-								<xsl:value-of select="/*/*/t:modification/t:reason/t:courtDecision/t:docDate"/>
-								<xsl:value-of select="/*/*/t:modification/t:reason/t:discussionResult/t:docDate"/>
-							</date>
-							<!-- <changes> -->
-							<rationale><xsl:value-of select="/*/*/t:modification/t:info"/></rationale>
-						</amendment>
+						<xsl:if test="/*/*/t:modification">
+							<amendment>
+								<!-- Optional -->
+								<date><xsl:value-of select="/*/*/t:docPublishDate"/></date>
+								<!-- <changes> -->
+								<rationale><xsl:value-of select="/*/*/t:modification/t:info"/></rationale>
+							</amendment>
+						</xsl:if>
 					</tender>
 					<xsl:if test="/*/*/t:purchaseResponsible/t:responsibleRole = 'CU'">
 						<buyer><xsl:copy-of select="$procuringEntity"/></buyer>
@@ -260,6 +257,7 @@
 					<x-source><xsl:copy-of select="/"/></x-source>
 				</release>
 			</xsl:when>
+			
 			<xsl:when test="/e:export/e:fcsPurchaseDocument[@schemeVersion=1.0] and /*/*/t:docType/t:code='P'">
 				<release>
 					<!-- Required -->
@@ -332,6 +330,7 @@
 					<x-source><xsl:copy-of select="/"/></x-source>
 				</release>
 			</xsl:when>
+			
 			<xsl:when test="/e:export/e:contract[@schemeVersion=1.0] and /*/*/t:foundation/t:fcsOrder/t:placing=9">
 				<release>
 					<!-- Required -->
@@ -375,34 +374,7 @@
 							<!-- <uri> -->
 						</x-extrabudget>
 					</planning>
-					<tender>
-						<!-- Required -->
-						<id><xsl:value-of select="/*/*/t:foundation/t:fcsOrder/t:notificationNumber"/></id>
-						<!-- Optional -->
-						<!-- <title> -->
-						<!-- <description> -->
-						<!-- <status> -->
-						<!-- <items> -->
-						<!-- <minValue> -->
-						<!-- <value> -->
-						<!-- <procurementMethod> -->
-						<!-- <procurementMethodRationale> -->
-						<!-- <awardCriteria> -->
-						<!-- <awardCriteriaDetails> -->
-						<!-- <submissionMethod> -->
-						<!-- <submissionMethodDetails> -->
-						<!-- <tenderPeriod> -->
-						<!-- <enquiryPeriod> -->
-						<!-- <hasEnquiries> -->
-						<!-- <eligibilityCriteria> -->
-						<!-- <awardPeriod> -->
-						<!-- <numberOfTenderers> -->
-						<!-- <tenderers> -->
-						<!-- <procuringEntity> -->
-						<!-- <documents> -->
-						<!-- <milestones> -->
-						<!-- <amendment> -->
-					</tender>
+					<!-- <tender> -->
 					<!-- <buyer> -->
 					<awards>
 						<!-- Required -->
@@ -497,7 +469,7 @@
 						<xsl:for-each select="/*/*/t:products/t:product">
 							<items>
 								<!-- Required -->
-								<id><xsl:value-of select="concat('position-', position())"/></id>
+								<id><xsl:value-of select="t:name"/></id>
 								<!-- Optional -->
 								<description><xsl:value-of select="t:name"/></description>
 								<classification>
@@ -568,7 +540,7 @@
 							<format>text/html</format>
 							<language>ru</language>
 						</documents>
-						<xsl:for-each select="/*/*/t:attachments/t:attachment | /*/*/t:scanDocuments/t:attachment">
+						<xsl:for-each select="/*/*/t:attachments/t:attachment | /*/*/t:scanDocuments/t:attachment | /*/*/t:medicalDocuments/t:attachment">
 							<documents>
 								<!-- Required -->
 								<id><xsl:value-of select="t:fileName"/></id>
