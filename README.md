@@ -4,6 +4,21 @@ publisher.
 
 Copyright 2015 Al Nikolov
 
+This file is part of ocds-ru suite.
+
+    ocds-ru is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    ocds-ru is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
 ## Preambula
 [OCDS](http://standard.open-contracting.org/) stands for Open Contracting 
 Data Standard and aims for a semantic network creation of contracting 
@@ -52,7 +67,7 @@ The current
 [technical regulation](http://zakupki.gov.ru/epz/main/public/download/downloadDocument.html?id=3228) 
 should be defining all the practicalities of accessing the data egress.
 
-#### Basic data
+## Basic data
 Data should be available at the 
 [FTP server](ftp://free:free@ftp.zakupki.gov.ru/fcs_regions/) in form of XML 
 documents, compressed into ZIP archives. 
@@ -62,37 +77,19 @@ The data egress is split by region (represented by the topmost directory).
 Data then is being 
 placed into directories named according to documents type:
 
-* "contracts" (contracts?),
-* "protocols" (protocols of something?),
-* "purchasedocs" (purchase acts?),
-* "notifications" (tender notifications, results),
-* "plangraphs" (procurement schedules, required by the law since Jan 1st 2016),
-* "sketchplans" (procurement plans, no structured data).
+* "contracts" (contracts/awards and contract implementations),
+* "protocols" (?protocols of something?),
+* "purchasedocs" (documents related to tenders?),
+* "notifications" (tenders),
+* "plangraphs" (no mapping -- procurement schedules required by the law since Jan 1st 2016),
+* "sketchplans" (no mapping -- procurement plans have no structured data).
 
 Monthly archives go to the topmost directories. Daily archives for the current
 month go to "currMonth" subdirectories.
 
 Presumaby, any date-time data is missing the MSK time zone.
 
-##### "notifications" type
-fcsPlacementResult
-: Not defined. Seem to be 
-
-
-##### "contracts" type
-contract
-: contract itself or a modification
-
-contractCancel
-: cancellation of a contract
-
-contractProcedure
-: implementation of a contract
-
-contractProcedureCancel
-: cancellation of a contract
-
-#### Auxiliary data
+## Auxiliary data
 The same regulation should be defining some auxiliary data 
 egresses, such as dictionaries. the said data should be available th the
 [FTP server](ftp://free:free@ftp.zakupki.gov.ru/fcs_nsi/).
@@ -110,54 +107,21 @@ Notably there should be the following data (in directories):
 
 etc. To be considered as needed.
 
-#### OCDS mapping
+## OCDS mapping
 
-##### Planning
-Doesn't seem to be feasible to map since no links to further stage
-documents were found.
+Following the realities of Russian government procurements, these 
+processes mapping id feasible.
 
-tenderPlan (plangraphs)
-: Procurement plan schedule.
+### Federal Act 44
+#### Request for quotations
 
-tenderPlanChange (plangraphs)
-: Modification to a procurement plan schedule. /Not seen yet/
+* /e:export/e:fcsNotificationZK[@schemeVersion=1.0] and /*/*/t:placingWay/t:code='ZK44'
+* /e:export/e:fcsPurchaseDocument[@schemeVersion=1.0] and /*/*/t:docType/t:code='P'
+* /e:export/e:contract[@schemeVersion=1.0] and /*/*/t:foundation/t:fcsOrder/t:placing=9
 
-tenderPlanCancel (plangraphs)
-: /Unknown/
-
-##### Tender
-fcsClarification
-
-fcsContractSign
-
-fcsNotificationCancel
-: Tender cancellation announcement
-
-fcsNotificationCancelFailure
-
-fcsNotificationEA44
-
-fcsNotificationEP44
-fcsNotificationISM44
-fcsNotificationLotCancel
-fcsNotificationOK44
-fcsNotificationOKD44
-fcsNotificationOKU44
-fcsNotificationPO44
-fcsNotificationZA44
-fcsNotificationZK44
-fcsNotificationZKB44
-fcsNotificationZKK44
-fcsNotificationZKKD44
-fcsNotificationZKKU44
-fcsNotificationZP44
-fcsPlacementResult
-fcsProtocolZKBI
-fcsPurchaseProlongationOK
-fcsPurchaseProlongationZK
-
-##### Contract
-contract
-contractCancel
-contractProcedure
-contractProcedureCancel
+## Autors
+Al Nikolov <root@toor.fi.eu.org>
+Solisevankuja 1 B 7
+027600
+Espoo
+Finland
