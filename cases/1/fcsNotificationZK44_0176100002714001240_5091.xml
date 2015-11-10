@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:export xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:ns2="http://zakupki.gov.ru/oos/export/1">
+    <ns2:fcsNotificationZK schemeVersion="1.0">
+        <id>5091</id>
+        <purchaseNumber>0176100002714001240</purchaseNumber>
+        <docPublishDate>2014-01-14T19:30:42.936+04:00</docPublishDate>
+        <href>http://zakupki.gov.ru/epz/order/notice/zk44/view/common-info.html?noticeId=5091</href>
+        <printForm>
+            <url>http://zakupki.gov.ru/epz/order/notice/printForm/view.html?noticeId=5091</url>
+        </printForm>
+        <purchaseObjectInfo>Приобретение бумаги для офисной технике Отдела МВД России по г. Майкопу</purchaseObjectInfo>
+        <purchaseResponsible>
+            <responsibleOrg>
+                <regNum>01761000027</regNum>
+                <fullName>Отдел Министерства внутренних дел Российской Федерации по городу Майкопу</fullName>
+                <postAddress>Российская Федерация, 385000, Адыгея Респ, Майкоп г, Краснооктябрьская ул, 23, -</postAddress>
+                <factAddress>Российская Федерация, 385000, Адыгея Респ, Майкоп г, Краснооктябрьская, 23, -</factAddress>
+            </responsibleOrg>
+            <responsibleRole>CU</responsibleRole>
+            <responsibleInfo>
+                <orgPostAddress>Российская Федерация, 385000, Адыгея Респ, Майкоп г, Краснооктябрьская ул, 23, -</orgPostAddress>
+                <orgFactAddress>Российская Федерация, 385000, Адыгея Респ, Майкоп г, Краснооктябрьская, 23, -</orgFactAddress>
+                <contactPerson>
+                    <lastName>Иванов</lastName>
+                    <firstName>Александр</firstName>
+                    <middleName>Александрович</middleName>
+                </contactPerson>
+                <contactEMail>byx.ovd.maykop@yandex.ru</contactEMail>
+                <contactPhone>7-8772-596568</contactPhone>
+            </responsibleInfo>
+        </purchaseResponsible>
+        <placingWay>
+            <code>ZK44</code>
+            <name>Запрос котировок</name>
+        </placingWay>
+        <contractServiceInfo>Приобретение бумаги для офисной техники «Светокопия» или эквивалент. Характеристика: Размер А4,с равномерной структурой бумажного полотна, белизна 94 % ISO, плотность 80 гр/кв.м. Срок поставки: Со дня заключения государственного контракта до 30.06.2014 года. Поставка осуществляется отдельными партиями согласно заявок Заказчика (в течение трех рабочих дней с момента подачи заявки на необходимое количество товара). В своей заявке Заказчик имеет право указать любое количество товара. Поставка товара осуществляется в рабочие дни,  в рабочее время с 09:00 до 18-00 часов, в пятницу с 09-00 до 16-45 часов (время Московское). Товар передается непосредственно должностным лицам, ответственным за приемку и хранение.</contractServiceInfo>
+        <procedureInfo>
+            <collecting>
+                <startDate>2014-01-14T09:00:00+04:00</startDate>
+                <place>Республика Адыгея, г.Майкоп, ул. Краснооктябрьская, 23</place>
+                <order>Согласно статьи 77 Федерального закона 44-ФЗ</order>
+                <endDate>2014-01-22T18:00:00+04:00</endDate>
+                <form>Котировочная заявка подается Заказчику в письменной форме в запечатанном конверте нарочно или по почте, а также в форме электронного документа на электронный адрес: byx.ovd.maykop@yandex.ru.</form>
+            </collecting>
+            <opening>
+                <date>2014-01-23T09:00:00+04:00</date>
+                <place>Республика Адыгея, г.Майкоп, ул. Краснооктябрьская, 23</place>
+            </opening>
+            <contracting>
+                <contractingTerm>не ранее чем через семь дней со дня размещения на официальном сайте протокола рассмотрения и оценки котировочных заявок и не позднее чем через двадцать дней со дня подписания указанного протокола</contractingTerm>
+                <evadeConditions>Согласно пункта 6 статьи 78 Федерального закона 44-ФЗ</evadeConditions>
+            </contracting>
+        </procedureInfo>
+        <lot>
+            <maxPrice>269990</maxPrice>
+            <maxPriceInfo>начальная цена контракта была установлена путем изучения Заказчиком рыночных цен, в том числе коммерческих предложений, поступивших от Исполнителей с указанием цен на запрашиваемые товары, используемые при этом. По результатам изученной Заказчиком информации была установлена начальная (максимальная) цена контракта. Расчет прилогается к извещению</maxPriceInfo>
+            <currency>
+                <code>RUB</code>
+                <name>Российский рубль</name>
+            </currency>
+            <financeSource>Федеральный бюджет</financeSource>
+            <quantityUndefined>false</quantityUndefined>
+            <customerRequirements>
+                <customerRequirement>
+                    <customer>
+                        <regNum>01761000027</regNum>
+                    </customer>
+                    <maxPrice>269990</maxPrice>
+                    <deliveryPlace>Республика Адыгея, г.Майкоп, ул. Краснооктябрьская, 23</deliveryPlace>
+                    <deliveryTerm>Со дня заключения государственного контракта до 30.06.2014 года. Поставка осуществляется отдельными партиями согласно заявок Заказчика (в течение трех рабочих дней с момента подачи заявки на необходимое количество товара). В своей заявке Заказчик имеет право указать любое количество товара. Поставка товара осуществляется в рабочие дни,  в рабочее время с 09:00 до 18-00 часов, в пятницу с 09-00 до 16-45 часов (время Московское). Товар передается непосредственно должностным лицам, ответственным за приемку и хранение.</deliveryTerm>
+                    <onesideRejection>Расторжение контракта допускается по соглашению сторон, по решению суда, в случае одностороннего отказа стороны контракта от исполнения контракта в соответствии с гражданским законодательством. Заказчик вправе принять решение об одностороннем отказе от исполнения контракта в соответствии с гражданским законодательством при условии, если это было предусмотренно контрактом.</onesideRejection>
+                </customerRequirement>
+            </customerRequirements>
+            <purchaseObjects>
+                <purchaseObject>
+                    <OKPD>
+                        <code>21.12.14.132</code>
+                        <name>Бумага для глубокой печати № 2</name>
+                    </OKPD>
+                    <name>Бумага для офисной техники</name>
+                    <OKEI>
+                        <code>778</code>
+                        <nationalCode>УПАК</nationalCode>
+                    </OKEI>
+                    <price>145</price>
+                    <quantity>
+                        <value>1862.0</value>
+                    </quantity>
+                    <sum>269990</sum>
+                </purchaseObject>
+                <totalSum>269990</totalSum>
+            </purchaseObjects>
+            <preferenses>
+                <preferense>
+                    <code>8361034</code>
+                    <name>Субъектам малого предпринимательства (в соответствии со Статьей 30 Федерального закона № 44-ФЗ)</name>
+                    <prefValue>0.0</prefValue>
+                </preferense>
+            </preferenses>
+            <requirements>
+                <requirement>
+                    <code>8361038</code>
+                    <name>Требование об отсутствии в предусмотренном Федеральным законом № 44-ФЗ реестре недобросовестных поставщиков (подрядчиков, исполнителей) информации об участнике запроса котировок, учредителях, о членах коллегиального исполнительного органа, лице, исполняющем функции единоличного исполнительного органа участника запроса котировок (для юридического лица) (в соответствии с Частью 1 Статьи 73 Федерального закона № 44-ФЗ)</name>
+                </requirement>
+            </requirements>
+            <restrictInfo>Нет</restrictInfo>
+        </lot>
+        <attachments>
+            <attachment>
+                <fileName>ЗК по приобрет. бумаги для офис. технике в 2014г.doc</fileName>
+                <docDescription>ЗК по приобрет. бумаги для офис. технике в 2014г</docDescription>
+                <url>http://zakupki.gov.ru/44fz/filestore/public/1.0/download/priz/file.html?uid=EFED80F3C92F006CE043AC1107256312</url>
+            </attachment>
+        </attachments>
+        <modification>
+            <modificationNumber>2</modificationNumber>
+            <info>Продление срока подачи заявок на 3 рабочих дня согласно п. 1 ст. 74 ФЗ-44</info>
+            <reason>
+                <responsibleDecision>
+                    <decisionDate>2014-01-14T00:00:00+04:00</decisionDate>
+                </responsibleDecision>
+            </reason>
+        </modification>
+    </ns2:fcsNotificationZK>
+</ns2:export>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:export xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:ns2="http://zakupki.gov.ru/oos/export/1">
+    <ns2:fcsPurchaseDocument schemeVersion="1.0">
+        <id>557</id>
+        <purchaseNumber>0176100002714001240</purchaseNumber>
+        <docNumber>№П1</docNumber>
+        <docDate>2014-01-23T00:00:00</docDate>
+        <docPublishDate>2014-01-23T18:12:03.896+04:00</docPublishDate>
+        <printForm>
+            <url>http://localhost/epz/order/notice/printForm/view.html?protocolsId=557</url>
+        </printForm>
+        <docType>
+            <code>P</code>
+            <name>Протокол предварительного отбора</name>
+        </docType>
+        <attachments>
+            <attachment>
+                <fileName>Протокол №1 от 23.01.14г. запрос котировок приобр. бумаги.docx</fileName>
+                <docDescription>Протокол №1 от 23.01.14г. запрос котировок приобр. бумаги</docDescription>
+                <url>http://zakupki.gov.ru/44fz/filestore/public/1.0/download/priz/file.html?uid=F0A40CFC418900FAE043AC1107257E78</url>
+            </attachment>
+        </attachments>
+    </ns2:fcsPurchaseDocument>
+</ns2:export>
