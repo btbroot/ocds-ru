@@ -19,8 +19,13 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:output method="text"/>
-	<xsl:template match="/">
-		<xsl:value-of select="concat('ocid=', release/ocid, ' id=', release/id, ' date=', release/date)"/>
+	<xsl:param name="ocid"/>
+	<xsl:template match="ocid">
+		<ocid><xsl:value-of select="$ocid"/></ocid>
+	</xsl:template>
+	<xsl:template match="node() | @*">
+		<xsl:copy>
+			<xsl:apply-templates select="node() | @*" />
+		</xsl:copy>
 	</xsl:template>
 </xsl:stylesheet>

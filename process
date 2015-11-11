@@ -1,4 +1,5 @@
-#!/usr/bin/make -f
+#!/bin/sh -e
+#
 # Copyright 2015 Al Nikolov
 #
 # This file is part of ocds-ru suite.
@@ -16,21 +17,16 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with ocds-ru.  If not, see <http://www.gnu.org/licenses/>.
 #
+eval $(xsltproc process.xslt $1)
+if [ -z "$ocid" ]; then
+        parent=$(find $PROCS_DIR -type f -name $(echo $id | cut -f1 -d_)_*.xml -print -quit)
+        [ -z "$parent" ] && echo "Unable to linkup" && exit 1
+        ocid=$(basename $(dirname $parent))
+        xsltproc -stringparam ocid $ocid -o $1.linkup linkup.xslt $1
+        mv $1.linkup $1 
+fi
+mkdir -p $PROCS_DIR/$ocid
+cp $1 $PROCS_DIR/$ocid/$id.xml
+touch -d $date $PROCS_DIR/$ocid/$id.xml
+touch $2
 
-WORK_DIR=work
-export PROCS_DIR=ocds-procs
-PHASE1=-name fcsNotification*.xml 
-PHASE1+=-o -name fcsPurchaseDocs*.xml
-PHASE1+=-o -name contract_*.xml
-PHASE2=! \( $(PHASE1) \)
-DOCS=$(shell find $(WORK_DIR) $(PHASE1))
-DOCS+=$(shell find $(WORK_DIR) $(PHASE2))
-
-.PHONY: ocds-procs ocds-docs clean
-
-ocds-procs: $(DOCS:%.xml=%.stamp)
-%.stamp: %.ocds process.xslt process; ./process $< $@
-%.ocds: %.xml ocds.xslt; xsltproc -o $@ ocds.xslt $<
-
-clean:
-	find $(WORK_DIR) -name *.ocds -delete

@@ -15,7 +15,7 @@
     GNU Affero General Public License for more details.
 
     You should have received a copy of the GNU Affero General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    along with ocds-ru.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <xsl:stylesheet version="1.0" 
@@ -353,7 +353,7 @@
 				<release>
 					<!-- Required -->
 					<ocid>ocds-btbroot01-<xsl:value-of select="/*/*/t:foundation/t:fcsOrder/t:notificationNumber"/></ocid>
-					<id><xsl:value-of select="/*/*/t:id"/></id>
+					<id><xsl:value-of select="concat(/*/*/t:regNum, '_', /*/*/t:id)"/></id>
 					<date><xsl:value-of select="/*/*/t:publishDate"/></date>
 					<tag>contract<xsl:if test="/*/*/t:modification">Amendment</xsl:if></tag>
 					<initiationType>tender</initiationType>
@@ -635,6 +635,20 @@
 					<x-source><xsl:copy-of select="/"/></x-source>
 				</release>
 			</xsl:when>
+
+			<xsl:when test="/e:export/e:contractProcedure[@schemeVersion=1.0]">
+				<release>
+					<!-- Required -->
+					<ocid/>
+					<id><xsl:value-of select="concat(/*/*/t:regNum, '_', /*/*/t:id)"/></id>
+					<date><xsl:value-of select="/*/*/t:publishDate"/></date>
+					<tag>implementationUpdate</tag>
+					<initiationType>tender</initiationType>
+					<!-- planning -->
+					
+				</release>
+			</xsl:when>
+
 			<xsl:otherwise>
 				<xsl:message terminate="yes">Unrecognized input type.</xsl:message>
 			</xsl:otherwise>

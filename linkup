@@ -1,4 +1,5 @@
-#!/usr/bin/make -f
+#!/bin/sh -e
+#
 # Copyright 2015 Al Nikolov
 #
 # This file is part of ocds-ru suite.
@@ -17,20 +18,10 @@
 #    along with ocds-ru.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-WORK_DIR=work
-export PROCS_DIR=ocds-procs
-PHASE1=-name fcsNotification*.xml 
-PHASE1+=-o -name fcsPurchaseDocs*.xml
-PHASE1+=-o -name contract_*.xml
-PHASE2=! \( $(PHASE1) \)
-DOCS=$(shell find $(WORK_DIR) $(PHASE1))
-DOCS+=$(shell find $(WORK_DIR) $(PHASE2))
-
-.PHONY: ocds-procs ocds-docs clean
-
-ocds-procs: $(DOCS:%.xml=%.stamp)
-%.stamp: %.ocds process.xslt process; ./process $< $@
-%.ocds: %.xml ocds.xslt; xsltproc -o $@ ocds.xslt $<
-
-clean:
-	find $(WORK_DIR) -name *.ocds -delete
+if basename $1 | grep ^contractProcedure_; then
+        parent=$(find $PROCS_DIR -name $(xsltproc linkup.xslt $1)_* -print -quit)
+        [ -z "$parent" ] && echo "Unable to linkup" && exit 1
+        basename $(dirname $parent) > $2
+else
+        touch $2
+fi
