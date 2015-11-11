@@ -130,7 +130,7 @@
 						<!-- Optional -->
 						<title><xsl:value-of select="/*/*/t:purchaseObjectInfo"/></title>
 						<!-- <description> -->
-						<!-- <status> -->
+						<status>active</status>
 						<xsl:for-each select="/*/*/t:lot/t:purchaseObjects/t:purchaseObject">
 							<items>
 								<!-- Required -->
@@ -642,10 +642,88 @@
 					<ocid/>
 					<id><xsl:value-of select="concat(/*/*/t:regNum, '_', /*/*/t:id)"/></id>
 					<date><xsl:value-of select="/*/*/t:publishDate"/></date>
+					<xsl:if test="/*/*/t:executions/t:finalStageExecution=1 or /*/*/t:terminations">
+						<tag>contractTermination</tag>
+					</xsl:if>
 					<tag>implementationUpdate</tag>
 					<initiationType>tender</initiationType>
-					<!-- planning -->
-					
+					<!-- Optional -->
+					<!-- <planning> -->
+					<!-- <tender> -->
+					<!-- <buyer> -->
+					<!-- <awards> -->
+					<contracts>
+						<!-- Required -->
+						<id><xsl:value-of select="/*/*/t:regNum"/></id>
+						<awardId><xsl:value-of select="/*/*/t:regNum"/></awardId>
+						<!-- Optional -->
+						<!-- <title> -->
+						<!-- <description> -->
+						<xsl:if test="/*/*/t:executions/t:finalStageExecution=1 or /*/*/t:terminations">
+							<tag>terminated</tag>
+						</xsl:if>
+						<!-- <period> -->
+						<!-- <value> -->
+						<!-- <items> -->
+						<!-- <dateSigned> -->
+						<!-- <documents> -->
+						<!-- <amendment> -->
+						<implementation>
+							<!-- Optional -->
+							<xsl:for-each select="/*/*/t:executions/t:execution">
+								<xsl:if test="t:paid">
+									<transactions>
+										<!-- Required -->
+										<id>
+											<xsl:value-of select="t:documentName"/>
+											<xsl:value-of select="t:documentNum"/>
+										</id>
+										<!-- Optional -->
+										<!-- <source> -->
+										<date><xsl:value-of select="t:documentDate"/></date>
+										<amount>
+											<!-- Optional -->
+											<amount><xsl:value-of select="t:paid"/></amount>
+											<!-- <currency> -->
+										</amount>
+										<!-- <providerOrganization> -->
+										<!-- <receiverOrganization> -->
+										<!-- <uri> -->
+									</transactions>
+								</xsl:if>
+							</xsl:for-each>
+							<!-- <milestones> -->
+							<documents>
+								<!-- Required -->
+								<id>__print__</id>
+								<!-- Optional -->
+								<documentType>physicalProcessReport</documentType>
+								<title>Этот документ (для печати)</title>
+								<url><xsl:value-of select="/*/*/t:printForm"/></url>
+								<datePublished><xsl:value-of select="/*/*/t:PublishDate"/></datePublished>
+								<!-- <dateModified> -->
+								<format>text/html</format>
+								<language>ru</language>
+							</documents>
+							<xsl:for-each select="/*/*/t:paymentDocuments/t:attachment">
+								<documents>
+									<!-- Required -->
+									<id><xsl:value-of select="t:fileName"/></id>
+									<!-- Optional -->
+									<!-- <documentType> -->
+									<title><xsl:value-of select="t:fileName"/></title>
+									<description><xsl:value-of select="t:docDescription"/></description>
+									<url><xsl:value-of select="t:url"/></url>
+									<!-- <datePublished> -->
+									<!-- <dateModified> -->
+									<!-- <format> -->
+									<language>ru</language>
+								</documents>
+							</xsl:for-each>
+						</implementation>
+					</contracts>
+					<language>ru</language>
+					<x-source><xsl:copy-of select="/"/></x-source>
 				</release>
 			</xsl:when>
 

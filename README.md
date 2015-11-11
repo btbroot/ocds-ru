@@ -2,10 +2,10 @@
 An attempt of mapping the raw data published on zakupki.gov.ru into OCDS 
 publisher.
 
-Copyright 2015 Al Nikolov
-
-This file is part of ocds-ru suite.
-
+ Copyright 2015 Al Nikolov
+ 
+ This file is part of ocds-ru suite.
+ 
     ocds-ru is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -77,7 +77,7 @@ The data egress is split by region (represented by the topmost directory).
 Data then is being 
 placed into directories named according to documents type:
 
-* "contracts" (contracts/awards and contract implementations),
+* "contracts" (contracts/awards and contract implementation steps),
 * "protocols" (?protocols of something?),
 * "purchasedocs" (documents related to tenders?),
 * "notifications" (tenders),
@@ -110,7 +110,7 @@ etc. To be considered as needed.
 ## OCDS mapping
 
 Following the realities of Russian government procurements, these 
-processes mapping id feasible.
+processes mapping appears to be feasible.
 
 ### Federal Act 44
 #### Request for quotations
@@ -118,6 +118,7 @@ processes mapping id feasible.
 * /e:export/e:fcsNotificationZK[@schemeVersion=1.0] and /*/*/t:placingWay/t:code='ZK44'
 * /e:export/e:fcsPurchaseDocument[@schemeVersion=1.0] and /*/*/t:docType/t:code='P'
 * /e:export/e:contract[@schemeVersion=1.0] and /*/*/t:foundation/t:fcsOrder/t:placing=9
+* /e:export/e:contractProcedure[@schemeVersion=1.0]
 
 ## Autors
 Al Nikolov <root@toor.fi.eu.org>
