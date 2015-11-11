@@ -20,7 +20,6 @@
 eval $(xsltproc process.xslt $1)
 if [ -z "$ocid" ]; then
         parent=$(find $PROCS_DIR -type f -name $(echo $id | cut -f1 -d_)_*.xml -print -quit)
-        [ -z "$parent" ] && echo "Unable to linkup" && exit 1
         ocid=$(basename $(dirname $parent))
         xsltproc -stringparam ocid $ocid -o $1.linkup linkup.xslt $1
         mv $1.linkup $1 
