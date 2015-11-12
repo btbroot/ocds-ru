@@ -26,11 +26,9 @@ PHASE2=! \( $(PHASE1) \)
 DOCS=$(shell find $(WORK_DIR) $(PHASE1))
 DOCS+=$(shell find $(WORK_DIR) $(PHASE2))
 
-.PHONY: ocds-procs ocds-docs clean
+.PHONY: all clean
 
-ocds-procs: $(DOCS:%.xml=%.stamp)
+all: $(DOCS:%.xml=%.stamp)
 %.stamp: %.ocds process.xslt process; ./process $< $@
 %.ocds: %.xml ocds.xslt; xsltproc -o $@ ocds.xslt $<
-
-clean:
-	find $(WORK_DIR) -name *.ocds -delete
+clean:; find $(WORK_DIR) -name *.stamp -delete

@@ -1,5 +1,4 @@
-#!/bin/sh -e
-#
+#!/usr/bin/make -f
 # Copyright 2015 Al Nikolov
 #
 # This file is part of ocds-ru suite.
@@ -17,14 +16,16 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with ocds-ru.  If not, see <http://www.gnu.org/licenses/>.
 #
-eval $(xsltproc process.xslt $1)
-if [ -z "$ocid" ]; then
-        parent=$(find $PROCS_DIR -type f -name $(echo $id | cut -f1 -d_)_*.xml -print -quit)
-        ocid=$(basename $(dirname $parent))
-        xsltproc -stringparam ocid $ocid -o $1.linkup linkup.xslt $1
-        mv $1.linkup $1 
-fi
-mkdir -p $PROCS_DIR/$ocid
-cp $1 $PROCS_DIR/$ocid/$id.xml
-touch $2
 
+PROCS_DIR=ocds-procs
+PROCS=$(shell find $(PROCS_DIR) -mindepth 1 -maxdepth 1 -type d)
+RECORDS=$(PROCS:%=%/record.json)
+
+.PHONY: all clean
+
+all: $(RECORDS)
+%.release.json: xml2json.xslt %.xml; xsltproc -o $@ $^
+clean:
+.SECONDEXPANSION:
+$(RECORDS): %/record.json: $$(addsuffix .release.json,$$(basename $$(wildcard $$*/*.xml)))
+	

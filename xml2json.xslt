@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!--
   Copyright (c) 2006,2008 Doeke Zanstra
+  Copyright 2015 Al Nikolov
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification, 
@@ -28,7 +29,7 @@
   <xsl:output indent="no" omit-xml-declaration="yes" method="text" encoding="UTF-8" media-type="application/json"/>
 	<xsl:strip-space elements="*"/>
   <!--default to no output-->
-  <xsl:variable name="output">false</xsl:variable>
+  <xsl:variable name="output">true</xsl:variable>
 
   <!--constant-->
   <xsl:variable name="d">0123456789</xsl:variable>
@@ -124,8 +125,12 @@
   </xsl:template>
 
   <!-- number (no support for javascript mantissa) -->
-  <xsl:template match="text()[not(string(number())='NaN' or
-                       (starts-with(.,'0' ) and . != '0'))]">
+  <xsl:template match="text()[
+  	(not(../@type) or ../@type='number')
+  	and not(string(number())='NaN' 
+		or (starts-with(.,'0') 
+			and . != '0'))
+  ]">
     <xsl:value-of select="."/>
   </xsl:template>
 
@@ -137,7 +142,7 @@
   <xsl:template match="*" name="base">
     <xsl:choose>
       <!-- complete array -->
-      <xsl:when test="(count(../*[name(current())=name()])=count(../*)) and count(../*[name(current())=name()])&gt;1">
+      <xsl:when test="(count(../*[name(current())=name()])=count(../*)) and (count(../*[name(current())=name()])&gt;1 or ../@type='array')">
         <xsl:variable name="el" select="name()"/>
         <xsl:if test="not(following-sibling::*[name()=$el])">
           <xsl:text>[</xsl:text>
@@ -206,7 +211,7 @@
   </xsl:template>
 
   <!-- convert root element to an anonymous container -->
-  <xsl:template match="/">
+  <xsl:template match="/*">
     <xsl:if test="$output='true'">
       <xsl:apply-templates select="node()"/>
     </xsl:if>
