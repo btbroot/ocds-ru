@@ -1,4 +1,4 @@
-#!/usr/bin/make -f
+#!/usr/bin/env python
 #
 # Copyright 2015 Al Nikolov
 #
@@ -18,20 +18,9 @@
 #    along with ocds-ru.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-PROCS_DIR=ocds-procs
-PROCS=$(shell find $(PROCS_DIR) -mindepth 1 -type d)
-RECORDPACKS=$(addsuffix .json,$(PROCS))
-SORTED_RELEASES=$(shell find $(basename $@) -name \*.xml -printf '%T@\t%p\n' | sort | cut -f2)
+import json
+import sys
 
-.PHONY: all clean
-all: $(RECORDPACKS)
-$(RECORDPACKS):
-	xsltproc -o $@.xml-tmp \
-		--stringparam ocid $(notdir $(basename $@)) \
-		--stringparam releases "$(SORTED_RELEASES)" record-package.xml
-	xsltproc -o $@.tmp xml2json.xslt $@.xml-tmp
-	./schema-validator.py ocds-schema/record-package-schema.json < $@.tmp
-	rm -f $@.xml-tmp
-	mv $@.tmp $@
-clean:
+import jsonschema
 
+jsonschema.validate(json.load(sys.stdin), json.load(open(sys.argv[1])))

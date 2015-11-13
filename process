@@ -26,5 +26,6 @@ if [ -z "$ocid" ]; then
 fi
 mkdir -p $PROCS_DIR/$ocid
 cp $1 $PROCS_DIR/$ocid/$id.xml
+touch -d $date $PROCS_DIR/$ocid/$id.xml
 touch $2
 
