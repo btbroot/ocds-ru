@@ -49,10 +49,10 @@ encompasses the whole cycle of:
 
 etc.
 
-Notably, these are not being regulated:
+Notably, these spendings are not being regulated:
 
-* services provided by international financial organizations;
-* security assurance for criminal victims, whitnesses, and also for judges etc.
+* on services provided by international financial organizations;
+* on security assurance for criminal victims, whitnesses, and also for judges etc.
 
 Some specifics can also be different for satisfying defence needs (Federal Act 
 275).
